@@ -3,6 +3,10 @@
 library(swirl)
 library(base64enc)
 
+if(file.exists("~/.Rprofile")){
+  source("~/.Rprofile")
+}
+
 swirl_user <- getOption("swirl_user")
 sdd <- swirl:::swirl_data_dir()
 
@@ -19,7 +23,7 @@ for(i in seq_along(swlogs)){
   log_ <- readRDS(swlogs[i])
   course <- log_$course_name
   lesson <- log_$lesson_name
-  dt <- file.mtime(swlogs[i])
+  dt <- file.info(swlogs[i])$mtime
   log_choices[i] <- paste(course, lesson, dt)
 }
 
